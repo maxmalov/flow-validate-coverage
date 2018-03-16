@@ -1,6 +1,6 @@
 {
   "name": "flow-validate-coverage",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Asserts the given file against the specified coverage threshold",
   "main": "main.js",
   "repository": "git@github.com:maxmalov/flow-validate-coverage.git",

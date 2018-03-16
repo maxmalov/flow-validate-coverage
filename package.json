@@ -5,5 +5,12 @@
   "main": "main.js",
   "repository": "git@github.com:maxmalov/flow-validate-coverage.git",
   "author": "Max Malov <m.malov.v@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "bin": {
+    "flow-validate-coverage": "./cli.js"
+  },
+  "dependencies": {
+    "execa": "0.10.0",
+    "yargs": "11.0.0"
+  }
 }

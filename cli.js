@@ -24,6 +24,7 @@ const argv = yargs
   .argv;
 
 const { f: flowPath, threshold, input: file } = argv;
+const flowBin = flowPath || 'flow';
 
 function error(msg) {
   console.error(msg);
@@ -32,9 +33,7 @@ function error(msg) {
 
 (async () => {
   try {
-    const flowBin = flowPath || 'flow';
     const flowStatus = await genCheckFlowStatus(flowBin, file);
-
     // skip files w/o flow annotation
     if (flowStatus === 'no flow') {
       return;

@@ -23,7 +23,7 @@ const argv = yargs
   .help()
   .argv;
 
-const { f: flowPath, t: threshold, _: [file] } = argv;
+const { f: flowPath, threshold, input: file } = argv;
 
 function error(msg) {
   console.error(msg);

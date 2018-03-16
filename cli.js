@@ -24,10 +24,10 @@ function error(msg) {
 
 (async () => {
   try {
-    const { stdout } = await execa(flowPath || 'flow', ['--coverage', file]);
+    const { stdout } = await execa(flowPath || 'flow', ['coverage', file]);
     const lines = stdout.split('\n');
-    const report = lines[lines.length - 1];
-    const [ coverage ] = report.match(covRegex);
+    const report = lines[lines.length - 2];
+    const [ _, coverage ] = report.match(covRegex);
     const numeric = Number(coverage);
 
     if (isNaN(numeric)) {
@@ -36,7 +36,7 @@ function error(msg) {
     }
 
     if (numeric < threshold) {
-      error(`${file} coverage ${numeric}% is below the specified threshold ${threshold}%`);
+      error(`${file}: coverage ${numeric}% is below the specified threshold ${threshold}%`);
     }
   } catch (e) {
     error(e);

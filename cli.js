@@ -2,6 +2,7 @@
 
 const yargs = require('yargs');
 const execa = require('execa');
+const { getStatus } = require('flow-annotation-check');
 
 const argv = yargs
   .usage('Usage: $0 [options] file')
@@ -15,8 +16,6 @@ const argv = yargs
 
 const { f: flowPath, t: threshold, _: [file] } = argv;
 
-const covRegex = /Covered: ([^%]+)%/;
-
 function error(msg) {
   console.error(msg);
   process.exitCode = 1;
@@ -24,19 +23,19 @@ function error(msg) {
 
 (async () => {
   try {
-    const { stdout } = await execa(flowPath || 'flow', ['coverage', file]);
-    const lines = stdout.split('\n');
-    const report = lines[lines.length - 2];
-    const [ _, coverage ] = report.match(covRegex);
-    const numeric = Number(coverage);
+    const flowStatus = await getStatus(file);
 
-    if (isNaN(numeric)) {
-      error('Cannot parse flow coverage info');
+    // skip files w/o flow annotation
+    if (flowStatus === 'no flow') {
       return;
     }
 
-    if (numeric < threshold) {
-      error(`${file}: coverage ${numeric}% is below the specified threshold ${threshold}%`);
+    const { stdout } = await execa(flowPath || 'flow', ['coverage', file, '--json']);
+    const { expressions: { covered_count, uncovered_count} } = JSON.parse(stdout);
+    const coverage = covered_count / (covered_count + uncovered_count);
+
+    if (coverage < threshold) {
+      error(`${file}: coverage ${coverage.toFixed(2)}% is below the specified threshold ${threshold}%`);
     }
   } catch (e) {
     error(e);

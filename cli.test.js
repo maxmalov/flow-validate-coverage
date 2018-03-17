@@ -51,4 +51,5 @@ test('should fail on file with low coverage', async () => {
 
 test('should pass on file with high coverage', async () => {
   await run(['-t85', `-i${flowHigh}`]);
+  await run(['-t100', `-i${flowHigh}`]);
 });

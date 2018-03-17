@@ -11,8 +11,10 @@
   },
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
+    "fmt": "prettier --write '**/*.js'",
     "precommit": "lint-staged",
-    "fmt": "prettier --write '**/*.js'"
+    "prepush": "npm t"
   },
   "dependencies": {
     "execa": "0.10.0",

@@ -1,4 +1,5 @@
 # flow-lint-coverage
+[![Build Status](https://travis-ci.org/maxmalov/flow-lint-coverage.svg?branch=master)](https://travis-ci.org/maxmalov/flow-lint-coverage)
 
 Simple utility to check whether flow coverage of a single javascript file satisfies the specified threshold
 

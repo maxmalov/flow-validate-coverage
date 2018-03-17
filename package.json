@@ -7,7 +7,7 @@
   "author": "Max Malov <m.malov.v@gmail.com>",
   "license": "MIT",
   "bin": {
-    "flow-validate-coverage": "./cli.js"
+    "flow-lint-coverage": "./cli.js"
   },
   "dependencies": {
     "execa": "0.10.0",

@@ -1,6 +1,6 @@
 {
   "name": "flow-lint-coverage",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Asserts the given file against the specified coverage threshold",
   "main": "main.js",
   "repository": "git@github.com:maxmalov/flow-lint-coverage.git",

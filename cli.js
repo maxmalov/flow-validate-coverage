@@ -19,11 +19,15 @@ const argv = yargs
     alias: 'f',
     describe: 'Custom flow binary path'
   })
+  .option('all', {
+    alias: 'a',
+    describe: 'Disables flow file annotation check before lint'
+  })
   .demandOption(['threshold', 'input'])
-  .help()
-  .argv;
+  .boolean(['all'])
+  .help().argv;
 
-const { f: flowPath, threshold, input: file } = argv;
+const { f: flowPath, threshold, input: file, all } = argv;
 const flowBin = flowPath || 'flow';
 
 function error(msg) {
@@ -33,18 +37,22 @@ function error(msg) {
 
 (async () => {
   try {
-    const flowStatus = await genCheckFlowStatus(flowBin, file);
-    // skip files w/o flow annotation
-    if (flowStatus === 'no flow') {
-      return;
+    if (!all) {
+      const flowStatus = await genCheckFlowStatus(flowBin, file);
+      // skip files w/o flow annotation
+      if (flowStatus === 'no flow') {
+        return;
+      }
     }
 
     const { stdout } = await execa(flowBin, ['coverage', file, '--json']);
-    const { expressions: { covered_count, uncovered_count} } = JSON.parse(stdout);
-    const coverage = (covered_count / (covered_count + uncovered_count)) * 100;
+    const { expressions: { covered_count, uncovered_count } } = JSON.parse(stdout);
+    const coverage = covered_count / (covered_count + uncovered_count) * 100;
 
     if (coverage < threshold) {
-      error(`${file}: coverage ${coverage.toFixed(2)}% is below the specified threshold ${threshold}%`);
+      error(
+        `${file}: coverage ${coverage.toFixed(2)}% is below the specified threshold ${threshold}%`
+      );
     }
   } catch (e) {
     error(e);

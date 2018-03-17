@@ -7,11 +7,33 @@
   "author": "Max Malov <m.malov.v@gmail.com>",
   "license": "MIT",
   "bin": {
-    "flow-lint-coverage": "./cli.js"
+    "flow-lint-coverage": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "precommit": "lint-staged",
+    "fmt": "prettier --write '**/*.js'"
   },
   "dependencies": {
     "execa": "0.10.0",
     "flow-annotation-check": "1.8.0",
     "yargs": "11.0.0"
+  },
+  "devDependencies": {
+    "flow-bin": "0.68.0",
+    "husky": "0.14.3",
+    "jest": "22.4.2",
+    "lint-staged": "7.0.0",
+    "prettier": "1.11.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true
   }
 }

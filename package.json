@@ -9,6 +9,9 @@
   "bin": {
     "flow-lint-coverage": "./bin/cli.js"
   },
+  "engines": {
+    "node": ">= 8.10.x <= 9.x.x"
+  },
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",

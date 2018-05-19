@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "execa": "0.10.0",
-    "flow-annotation-check": "1.8.0",
+    "flow-annotation-check": "1.8.1-0",
     "yargs": "11.0.0"
   },
   "devDependencies": {

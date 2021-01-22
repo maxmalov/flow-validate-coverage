@@ -1394,9 +1394,9 @@ flow-annotation-check@1.11.2:
     glob "7.1.4"
     load-pkg "^4.0.0"
 
-flow-bin@0.78.0:
-  version "0.78.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.78.0.tgz#df9fe7f9c9a2dfaff39083949fe2d831b41627b7"
+flow-bin@0.143.1:
+  version "0.143.1"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.143.1.tgz#2ff825dfd85e84531b0ae780842cb1c2a9743cd2"
 
 for-in@^1.0.2:
   version "1.0.2"
